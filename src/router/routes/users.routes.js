@@ -44,17 +44,6 @@ export default function () {
       component: () => import(/* webpackChunkName: "about" */ '@/views/Applications.vue')
     },
     {
-      path: '/createApp',
-      name: 'CreateApp',
-      meta: {
-        layout: 'main',
-        middleware: [
-          auth
-        ]
-      },
-      component: () => import(/* webpackChunkName: "about" */ '@/views/user/CreateApp')
-    },
-    {
       path: '/profile',
       name: 'Profile',
       meta: {

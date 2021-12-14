@@ -1,5 +1,5 @@
 <template>
-  <q-header elevated>
+  <q-header elevated style="background-color: #8A8DAF;">
     <q-toolbar
       flat
     >
@@ -32,7 +32,6 @@
       </q-tabs>
       <q-tabs
         shrink
-        inline-label
       >
         <q-route-tab
           v-if="isAdmin"
@@ -41,24 +40,15 @@
           to="/admin"
           exact
         />
-        <q-route-tab
-          v-if="isAuth"
-          name="createApp"
-          icon="add"
-          label="Новая заявка"
-          to="/createApp"
-          exact
-        />
       </q-tabs>
       <div
         class="text-white q-gutter-md q-mx-md"
         style="font-size: 1.5em">
-
         <q-icon
           v-if="isAuth"
-          name="info"
+          name="add"
           class="cursor-pointer"
-          @click="showMap = true"
+          @click="createApp = true"
         />
 
         <HeaderProfileList />
@@ -75,8 +65,7 @@
 
   <HeaderDrawer v-model="leftDrawerOpen"/>
 
-  <AppCreateDialog />
-
+  <AppCreateDialog v-model="createApp"/>
 </template>
 
 <script>
@@ -90,10 +79,11 @@ import HeaderProfileList from '../header/HeaderProfileList'
 export default {
   name: 'TheHeader',
   components: { AppCreateDialog, HeaderDrawer, HeaderProfileList },
+
   setup () {
     const store = useStore()
 
-    const showMap = ref(false)
+    const createApp = ref(false)
     const isAuth = computed(() => store.getters['auth/isAuthenticated'])
     const isAdmin = computed(() => store.getters['auth/isAdmin'])
     const links = [
@@ -114,7 +104,7 @@ export default {
       links,
       isAuth,
       isAdmin,
-      showMap
+      createApp
     }
   }
 }
